@@ -1,0 +1,323 @@
+NpcDialogLabel < UITextEdit
+  font: verdana-11px-antialised
+  height: 14
+  color: yellow
+  margin-left: 2
+  text-wrap: true
+  text-auto-resize: true
+  selection-color: #f4f4f4ff
+  selection-background-color: #808080ff
+  change-cursor-image: false
+  cursor-visible: false
+  editable: false
+  draggable: true
+  selectable: false
+  focusable: false
+
+MainWindow
+  id: npcDialogWindow
+  size: 397 395
+  padding: 0
+  image-source: /images/ui/window_new.png
+  image-border: 40
+  image-clip: 0 0 256 256
+  visible: false
+  @onEscape: modules.npc_dialog.close()
+
+  UIWidget
+    id: banner
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: -10
+    margin-right: -55
+    image-source: /modules/npc_dialog/static/images/blue-golden-flag-banner.png
+    phantom: true
+
+  ScrollablePanel
+    id: dialogPanel
+    size: 365 289
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 29
+    margin-left: 16
+    image-source: /images/ui/3pixel_frame_borderimage
+    image-border: 3
+    padding: 10
+    vertical-scrollbar: dialogScrollbar
+    inverted-scroll: true
+    layout:
+      type: verticalBox
+      align-bottom: true
+
+  VerticalSeparator
+    id: separator
+    visible: false
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: dialogPanel.right
+    margin-left: 10
+    margin-top: 30
+    margin-bottom: 10
+
+  UIWidget
+    id: tradeContainer
+    anchors.top: separator.top
+    anchors.bottom: parent.bottom
+    anchors.left: separator.right
+    anchors.right: parent.right
+    margin-top: 0
+
+  VerticalScrollBar
+    id: dialogScrollbar
+    anchors.top: dialogPanel.top
+    anchors.bottom: dialogPanel.bottom
+    anchors.right: dialogPanel.right
+    step: 14
+    pixels-scroll: true
+    margin-right: 2
+    margin-top: 2
+    margin-bottom: 2
+
+  UIWidget
+    id: buttonContainer
+    height: 35
+    anchors.bottom: textInput.top
+    anchors.left: parent.left
+    anchors.right: chatButton.left
+    margin-bottom: 5
+    margin-left: 16
+    layout:
+      type: horizontalBox
+      spacing: 5
+
+    Button
+      id: buttonBalance
+      size: 35 35
+      visible: false
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Balance
+      @onClick: modules.npc_dialog.doBalance()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 128 0 32 32
+        phantom: true
+
+    Button
+      id: buttonDeposit
+      size: 35 35
+      visible: false
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Deposit All
+      @onClick: modules.npc_dialog.doDepositAll()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 160 0 32 32
+        phantom: true
+
+    Button
+      id: buttonWithdraw
+      size: 35 35
+      visible: false
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Withdraw
+      @onClick: modules.npc_dialog.doWithdraw()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 192 0 32 32
+        phantom: true
+
+    Button
+      id: buttonSail
+      size: 35 35
+      visible: false
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Sail
+      @onClick: modules.npc_dialog.doSail()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 0 0 32 32
+        phantom: true
+
+    Button
+      id: buttonYes
+      size: 35 35
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Yes
+      @onClick: modules.npc_dialog.doYes()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 224 0 32 32
+        phantom: true
+
+    Button
+      id: buttonNo
+      size: 35 35
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: No
+      @onClick: modules.npc_dialog.doNo()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 256 0 32 32
+        phantom: true
+
+    Button
+      id: buttonBye
+      size: 35 35
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Bye
+      @onClick: modules.npc_dialog.doBye()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 288 0 32 32
+        phantom: true
+
+    Button
+      id: buttonTrade
+      size: 35 35
+      image-source: /images/ui/button-9grid-idle.png
+      image-clip: 0 0 98 40
+      image-border: 10
+      tooltip: Trade
+      @onClick: modules.npc_dialog.doTrade()
+      $pressed:
+        image-source: /images/ui/button-9grid-pressed.png
+        image-clip: 0 0 98 40
+
+      UIWidget
+        id: icon
+        size: 32 32
+        anchors.centerIn: parent
+        image-source: /modules/npc_dialog/static/images/icons-npcdialog.png
+        image-clip: 32 0 32 32
+        phantom: true
+
+  TextEdit
+    id: textInput
+    size: 299 16
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 16
+    margin-bottom: 16
+    image-source: /images/ui/search-text-void.png
+    image-clip: 0 0 150 16
+    image-border: 5
+    tooltip: tr('Enter text here')
+    text-align: left
+    multiline: false
+    text-auto-submit: true
+
+  Button
+    id: chatButton
+    !text: tr('Chat On')
+    font: cipsoftFont
+    size: 64 16
+    anchors.left: textInput.right
+    anchors.bottom: textInput.bottom
+    margin-left: 2
+    @onClick: modules.npc_dialog.doChatToggle()
+
+  UIWidget
+    id: pedestal
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: -7
+    margin-left: 10
+    image-source: /modules/npc_dialog/static/images/backdrop-npcdialog-podestal.png
+    phantom: true
+
+  UICreature
+    id: npcOutfit
+    size: 64 64
+    anchors.bottom: pedestal.bottom
+    anchors.horizontalCenter: pedestal.horizontalCenter
+    margin-bottom: 5
+    margin-left: -5
+    phantom: true
+
+  Label
+    id: npcNameLabel
+    font: $var-cip-font
+    color: $var-text-color
+    anchors.left: pedestal.right
+    anchors.right: banner.right
+    anchors.top: banner.verticalCenter
+    margin-top: -7
+    margin-left: 10
+    margin-right: 20
+    text-auto-resize: true
+    text-wrap: true
+    text-align: left
+
+  UIButton
+    id: closeButton
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 2
+    margin-right: 2
+    image-source: /images/ui/miniwindow/exit-button-small-up.png
+    @onClick: modules.npc_dialog.doBye()
+    $pressed:
+      image-source: /images/ui/miniwindow/exit-button-small-down.png

@@ -1,0 +1,10 @@
+Module
+  name: game_npctrade
+  description: NPC trade interface
+  author: andrefaramir, baxnie
+  website: https://github.com/edubart/otclient
+  sandboxed: true
+  dependencies: [ game_interface ]
+  scripts: [ npctrade ]
+  @onLoad: init()
+  @onUnload: terminate()

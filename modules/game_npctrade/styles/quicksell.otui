@@ -1,0 +1,187 @@
+QuickSellWindow < MainWindow
+  id: quickSellWindow
+  !text: ''
+  size: 655 330
+  image-source: /images/ui/2pixel-up-frame-borderimage-upside-down
+  image-clip: 0 0 100 100
+  image-border: 20
+  padding: 12
+  @onEscape: self:destroy()
+  UIWidget
+    size: 145 56
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: -46
+    image-source: /images/game/tutorial/backdrop_crest
+    phantom: true
+
+  Panel
+    id: optionsTabBar
+    height: 36
+    image-source: /images/game/destiny_wheel/menuBg
+    image-border: 1
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 12
+    
+    Button
+      id: sellAllTab
+      anchors.top: parent.top
+      anchors.left: parent.left
+      size: 315 34
+      margin-left: 1
+      margin-top: 1
+      image-source: /game_npctrade/images/sellAll
+      image-clip: 0 0 315 34
+      checkable: true
+      checked: true
+      $hover !checked:
+        image-clip: 0 0 315 34
+      $pressed:
+        image-clip: 0 34 315 34
+      $checked:
+        image-clip: 0 34 315 34
+
+    Button
+      id: blacklistTab
+      anchors.top: parent.top
+      anchors.left: sellAllTab.right
+      size: 314 34
+      margin-left: 1
+      margin-top: 1
+      image-source: /game_npctrade/images/blacklist
+      image-clip: 0 0 314 34
+      checkable: true
+      $hover !checked:
+        image-clip: 0 0 314 34
+      $pressed:
+        image-clip: 0 34 314 34
+      $checked:
+        image-clip: 0 34 314 34    
+
+  Panel
+    id: saleProgress
+    size: 631 20
+    anchors.top: optionsTabBar.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    image-source: /images/ui/infoPanel
+    image-border: 1
+    image-clip: 0 0 108 13
+
+    ProgressBar
+      id: progressBar
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      width: 0
+      margin: 3
+      image-source: /images/bars/horizontal_health_progressbar_large_100
+      image-border: 0
+      image-clip: 0 0 1 25
+      background-color: alpha
+
+    Label
+      id: progressLabel
+      !text: tr('Sale Progress')
+      font: $var-cip-font
+      color: $var-text-color
+      anchors.centerIn: parent
+      text-auto-resize: true
+
+  Panel
+    id: contentPanel
+    size: 631 175
+    anchors.top: saleProgress.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    image-source: /images/ui/2pixel_up_frame_borderimage
+    image-border: 20
+
+    ScrollablePanel
+      id: itemsPanel
+      size: 617 161
+      anchors.centerIn: parent
+      vertical-scrollbar: itemsPanelScrollBar
+      image-source: /images/ui/1pixel_down_frame
+      image-border: 20
+      padding: 5
+      layout:
+        type: grid
+        cell-size: 34 34
+        cell-spacing: 3
+        flow: true
+      
+    VerticalScrollBar
+      id: itemsPanelScrollBar
+      anchors.top: itemsPanel.top
+      anchors.bottom: itemsPanel.bottom
+      anchors.right: itemsPanel.right
+      step: 35
+      pixels-scroll: true
+
+  HorizontalSeparator
+    id: bottomSeparator
+    size: 631 2
+    anchors.top: contentPanel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+
+  Label
+    id: saleValueLabel
+    !text: tr('Sale value:')
+    font: $var-cip-font
+    color: $var-text-color
+    anchors.top: bottomSeparator.bottom
+    anchors.left: parent.left
+    margin-top: 13
+    font: $var-cip-font
+    color: #c0c0c0
+    text-auto-resize: true
+
+  Panel
+    id: totalValuePanel
+    size: 130 20
+    anchors.verticalCenter: saleValueLabel.verticalCenter
+    anchors.left: saleValueLabel.right
+    margin-left: 5
+    image-source: /images/ui/infoPanel
+    image-border: 1
+    image-clip: 0 0 108 13
+    
+    UIWidget
+      id: goldIcon
+      anchors.right: parent.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-right: 5
+      image-source: /images/game/cyclopedia/icons/icon-goldcoin
+      
+  Button
+    id: sellAllButton
+    !text: tr('Sell All')
+    size: 60 20
+    font: cipsoftFont
+    color: $var-text-cip-color-highlight
+    anchors.top: bottomSeparator.bottom
+    anchors.right: closeButton.left
+    margin-top: 10
+    margin-right: 5
+
+
+  Button
+    id: closeButton
+    !text: tr('Close')
+    size: 43 20
+    font: cipsoftFont
+    color: $var-text-cip-color-highlight
+    anchors.top: bottomSeparator.bottom
+    anchors.right: parent.right
+    margin-top: 10
+    @onClick: self:getParent():destroy()
+
+
+QuickSellWindow

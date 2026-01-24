@@ -1,0 +1,90 @@
+QuickSellItem < UIItem
+  size: 34 34
+  padding: 1
+  image-source: /images/ui/item
+  image-border: 1
+  font: verdana-11px-rounded
+  border-color: white
+  
+  $selected:
+    border-color: #ffffff
+    background-color: #ffffff20
+
+  UIWidget
+    id: statusIcon
+    size: 12 12
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-right: 1
+    margin-top: 1
+    image-source: /images/store/icon-no
+
+  Label
+    id: quantityLabel
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 2
+    margin-bottom: 1
+    font: verdana-11px-rounded
+    color: #ffffff
+    text-align: right
+    text-auto-resize: true
+    !text: '1'
+
+NPCItemBox < UICheckBox
+  height: 35
+  background-color: #404040
+  @onCheckChange: modules.game_npctrade.onItemBoxChecked(self)
+  tooltip-delayed: true
+
+  UIWidget
+    size: 34 34
+    image-source: /images/ui/item
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-left: 2
+    phantom: true
+    anchors.verticalCenter: parent.verticalCenter
+
+  UIItem
+    id: item
+    size: 32 32
+    virtual: true
+    priceable: false
+    draggable: false
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 3
+    phantom: true
+
+  UIWidget
+    id: nameLabel
+    anchors.top: parent.top
+    anchors.left: prev.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 4
+    text-align: left
+    text-auto-resize: true
+    font: $var-cip-font
+    color: $var-text-cip-color
+    phantom: true
+
+  $checked:
+    background-color: #585858
+
+EmbeddedNpcTrade
+  id: tradeWindow
+  height: 365
+  @onEscape: modules.game_npctrade.toggleNPCFocus(false)
+
+  NpcWindowContents
+
+  VerticalScrollBar
+    id: miniwindowScrollBar
+    anchors.top: contentsPanel.top
+    anchors.bottom: contentsPanel.bottom
+    anchors.right: contentsPanel.right
+    step: 15
+    margin-right: 2
+    pixels-scroll: true

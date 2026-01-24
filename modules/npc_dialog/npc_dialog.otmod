@@ -1,0 +1,10 @@
+Module
+  name: npc_dialog
+  description: NPC Dialog System
+  author: ChatGptinho
+  website: https://github.com/edubart/otclient
+  sandboxed: true
+  dependencies: [ game_interface, client_styles, game_console ]
+  scripts: [ npc_dialog ]
+  @onLoad: init()
+  @onUnload: terminate()
