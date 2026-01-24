@@ -258,6 +258,12 @@ function terminate()
 
   -- Unregister the trade message callback
   unregisterMessageMode(MessageModes.TradeNpc, onQuickSellTradeMessage)
+  
+  npcWindow = nil
+  itemsPanel = nil
+  quantityScroll = nil
+  tradeButton = nil
+  setupPanel = nil
 end
 
 function show()
@@ -326,7 +332,9 @@ function hide()
   m_interface.getConsole():focus()
 
   local layout = itemsPanel:getLayout()
-  layout:disableUpdates()
+  if layout then
+    layout:disableUpdates()
+  end
 
   clearSelectedItem()
 
@@ -538,7 +546,7 @@ end
 
 function clearSelectedItem()
   priceLabel:setText("0")
-  if quantityScroll then
+  if quantityScroll and quantityScroll.setRange then
     quantityScroll:setRange(0, 0)
     quantityScroll:setValue(0)
     quantityScroll:setOn(true)
